@@ -20,6 +20,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.gpayclone.presenter.signIn.GoogleAuthUiClient
 import com.example.gpayclone.presenter.signIn.SignInViewModel
+import com.example.gpayclone.ui.GPayCloneApp
+import com.example.gpayclone.ui.navigation.Screens
 import com.example.gpayclone.ui.screens.ProfileScreen
 import com.example.gpayclone.ui.screens.SignInScreen
 import com.example.gpayclone.ui.theme.GPayCloneTheme
@@ -78,7 +80,7 @@ class MainActivity : ComponentActivity() {
                                         Toast.LENGTH_LONG
                                     ).show()
 
-                                    navController.navigate("profile")
+                                    navController.navigate(Screens.Home.route)
                                     viewModel.resetState()
                                 }
                             }
@@ -99,6 +101,23 @@ class MainActivity : ComponentActivity() {
                         }
                         composable("profile") {
                             ProfileScreen(
+                                userData = googleAuthUiClient.getSignedInUser(),
+                                onSignOut = {
+                                    lifecycleScope.launch {
+                                        googleAuthUiClient.signOut()
+                                        Toast.makeText(
+                                            applicationContext,
+                                            "Signed out",
+                                            Toast.LENGTH_LONG
+                                        ).show()
+
+                                        navController.popBackStack()
+                                    }
+                                }
+                            )
+                        }
+                        composable(Screens.Home.route) {
+                            GPayCloneApp(
                                 userData = googleAuthUiClient.getSignedInUser(),
                                 onSignOut = {
                                     lifecycleScope.launch {
