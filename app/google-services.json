@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "966186161474",
+    "project_id": "clonewars-6b2c6",
+    "storage_bucket": "clonewars-6b2c6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:966186161474:android:d9fd1072c0fe9d9269e4db",
+        "android_client_info": {
+          "package_name": "com.example.clonewars"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWmZD7uf9N-auKwuHK-DmEhPLukqHuR7Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:966186161474:android:25056d52aa22f93769e4db",
+        "android_client_info": {
+          "package_name": "com.example.gpayclone"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWmZD7uf9N-auKwuHK-DmEhPLukqHuR7Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
