@@ -60,7 +60,7 @@ fun HomeScreen(userData: UserData = UserData("", "", "")) {
                 Text(text = userData.username!!)
                 Row {
 
-                    Button(onClick = { viewModel.increaseBalance(userData.userId,1000) }) {
+                    Button(onClick = { viewModel.increaseBalance(userData.userId,balance.toInt()+1000) }) {
                         Text(text = "Add Amount")
                     }
                     Button(onClick = {

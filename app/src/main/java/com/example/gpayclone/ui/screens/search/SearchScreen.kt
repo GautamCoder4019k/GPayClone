@@ -23,6 +23,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -30,6 +31,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.gpayclone.presenter.signIn.UserData
+import com.example.gpayclone.ui.screens.User
+import kotlinx.coroutines.launch
 
 @Preview(showSystemUi = true, showBackground = true)
 @OptIn(ExperimentalMaterial3Api::class)
@@ -38,8 +41,12 @@ fun SearchScreen(
     viewModel: SearchViewModel = androidx.lifecycle.viewmodel.compose.viewModel(),
     onUserClicked: () -> Unit = {}
 ) {
+    val scope= rememberCoroutineScope()
     val searchText by viewModel.searchText.collectAsState()
     val songs by viewModel.songs.collectAsState(initial = emptyList())
+    var users by remember {
+        mutableStateOf(listOf<String>())
+    }
     var active by remember {
         mutableStateOf(false)
     }
@@ -50,6 +57,7 @@ fun SearchScreen(
             onQueryChange = viewModel::onSearchTextChange,
             onSearch = {
                 active = false
+                scope.launch { users= viewModel.fetchUsers() }
 
             },
             active = active,
@@ -89,8 +97,8 @@ fun SearchScreen(
                 )
             } else {
                 LazyColumn(contentPadding = PaddingValues(8.dp)) {
-                    itemsIndexed(items = songs) { _, song ->
-
+                    itemsIndexed(items = users) { _, user ->
+                        Text(text =user )
                     }
                 }
             }
